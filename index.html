@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>˹ ɴσʙιтα ꭙ мσνιє ˼</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            min-width: 1024px;
+            transition: all 0.3s ease;
+        }
+
+        body.mobile-mode {
+            min-width: 360px;
+        }
+
+        header {
+            background-color: #000000;
+            text-align: center;
+            padding: 1.5rem;
+            border-bottom: 3px solid #00f0ff;
+        }
+
+        header img {
+            max-width: 200px;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        header h1 {
+            color: #00f0ff;
+            font-size: 3em;
+            text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: #00f0ff;
+            font-weight: bold;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        nav a:hover {
+            text-shadow: 0 0 12px #fff;
+        }
+
+        .toggle-mode {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .toggle-mode button {
+            padding: 12px 25px;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        section {
+            padding: 50px 0;
+        }
+
+        .search-section {
+            text-align: center;
+        }
+
+        .search-section input[type="text"] {
+            padding: 15px;
+            width: 60%;
+            max-width: 600px;
+            background-color: #0d0d0d;
+            color: #fff;
+            border: 2px solid #00f0ff;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .search-section button {
+            padding: 15px 30px;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .search-section button:hover {
+            background-color: #fff;
+            color: #00f0ff;
+        }
+
+        #movieResult {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #movieResult img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+        }
+
+        #movieResult h2 {
+            color: #00f0ff;
+            font-size: 2em;
+        }
+
+        #movieResult p {
+            color: #ccc;
+            font-size: 1.1em;
+        }
+
+        #movieResult button {
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        #movieResult button:hover {
+            background-color: #fff;
+            color: #00f0ff;
+        }
+
+        #suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .movie-card {
+            background-color: #1a1a1a;
+            border: 1px solid #00f0ff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+        }
+
+        .movie-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .movie-card h3 {
+            color: #00f0ff;
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+
+        .movie-card p {
+            font-size: 1em;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .movie-card button {
+            margin: 8px;
+            padding: 12px 20px;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .movie-card button:hover {
+            background-color: #fff;
+            color: #00f0ff;
+        }
+
+        .color-picker {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .color-picker select {
+            padding: 10px;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            border: 1px solid #00f0ff;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+
+        #about-section {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        #about-section img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+            margin-bottom: 25px;
+        }
+
+        #about-section button {
+            margin: 15px;
+            padding: 15px 30px;
+            background-color: #00f0ff;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        #about-section button:hover {
+            background-color: #fff;
+            color: #00f0ff;
+        }
+
+        footer {
+            background-color: #000000;
+            text-align: center;
+            color: #cccccc;
+            padding: 30px;
+            border-top: 3px solid #00f0ff;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="#"><img src="YOUR_LOGO_LINK_HERE" alt="Logo"/></a>
+    <h1>˹ ɴσʙιтα ꭙ мσνιє ˼</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#search-section">Movie</a>
+        <a href="#about-section">About</a>
+    </nav>
+</header>
+
+<div class="toggle-mode">
+    <button id="modeToggleBtn">ᴛᴜʀɴ ɪɴᴛᴏ ᴍᴏʙɪʟᴇ ᴍᴏᴅᴇ 📲 </button>
+</div>
+
+<div class="container" id="home">
+
+    <section id="search-section">
+        <input type="text" id="movieInput" placeholder="Enter movie title..."/>
+        <button id="searchBtn">Search</button>
+        <div id="movieResult"></div>
+    </section>
+
+    <section id="suggestion-section">
+        <h2>sᴜɢɢᴇsᴛɪᴏɴ ғᴏʀ ᴍᴏᴠɪᴇs 🎥</h2>
+        <div id="suggestions"></div>
+    </section>
+
+    <section id="about-section">
+        <img src="https://via.placeholder.com/300x300?text=About+Image" alt="About Image"/>
+        <div>
+            <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">Telegram Bot</button>
+            <button onclick="window.open('https://t.me/NobitaBhaskar', '_blank')">Developer 👨🏻‍💻</button>
+        </div>
+    </section>
+
+    <section class="color-picker">
+        <label for="themeColor">ᴛᴏɢɢʟᴇ ᴡᴇʙsɪᴛᴇ ➻:</label>
+        <select id="themeColor">
+            <option value="#0d0d0d">ᴀᴘᴘ sᴜɢɢᴇsᴛᴇᴅ ✤</option>
+            <option value="#00f0ff">Neon Blue</option>
+            <option value="#ff00ff">Neon Magenta</option>
+            <option value="#00ff00">Neon Green</option>
+            <option value="#ffff00">Neon Yellow</option>
+        </select>
+    </section>
+</div>
+
+<footer>
+    &copy; 2023 ˹ ɴσʙιтα ꭙ мσνιє ˼. All rights reserved.
+</footer>
+
+<script>
+    const IMDB_API_KEY = 'd56c5267';
+    const modeToggleBtn = document.getElementById('modeToggleBtn');
+
+    modeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-mode');
+        modeToggleBtn.textContent = document.body.classList.contains('mobile-mode')
+            ? 'Turn Into Desktop Mode'
+            : 'Turn Into Mobile Mode';
+    });
+
+    document.getElementById('themeColor').addEventListener('change', function () {
+        document.body.style.backgroundColor = this.value;
+    });
+
+    document.getElementById('searchBtn').addEventListener('click', function () {
+        const title = document.getElementById('movieInput').value;
+        if (!title) return alert('Please enter a movie title.');
+
+        fetch(`https://www.omdbapi.com/?apikey=${IMDB_API_KEY}&t=${encodeURIComponent(title)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.Response === "True") {
+                    const imdbLink = `https://www.imdb.com/title/${data.imdbID}/`;
+                    document.getElementById('movieResult').innerHTML = `
+                        <img src="${data.Poster}" alt="${data.Title}"/>
+                        <h2>${data.Title}</h2>
+                        <p>${data.Plot}</p>
+                        <button onclick="window.open('${imdbLink}', '_blank')">Watch on IMDb</button>
+                        <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">Watch on Telegram</button>
+                    `;
+                } else {
+                    alert('Movie not found.');
+                }
+            });
+    });
+
+    function loadSuggestions() {
+        const suggestionContainer = document.getElementById('suggestions');
+        suggestionContainer.innerHTML = '';
+
+        const movies = [
+            "Inception", "The Dark Knight", "Interstellar", "The Matrix",
+            "Parasite", "Joker", "Gladiator", "Whiplash",
+            "Avengers: Endgame", "Pulp Fiction"
+        ];
+
+        const shuffled = movies.sort(() => 0.5 - Math.random()).slice(0, 6);
+
+        shuffled.forEach(title => {
+            fetch(`https://www.omdbapi.com/?apikey=${IMDB_API_KEY}&t=${encodeURIComponent(title)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.Response === "True") {
+                        const imdbLink = `https://www.imdb.com/title/${data.imdbID}/`;
+                        suggestionContainer.innerHTML += `
+                            <div class="movie-card">
+                                <img src="${data.Poster}" alt="${data.Title}"/>
+                                <h3>${data.Title}</h3>
+                                <p>${data.Plot}</p>
+                                <button onclick="window.open('${imdbLink}', '_blank')">Watch on IMDb</button>
+                                <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">Watch on Telegram</button>
+                            </div>
+                        `;
+                    }
+                });
+        });
+    }
+
+    window.addEventListener('load', loadSuggestions);
+  </script>

@@ -1,380 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>˹ ɴσʙιтα ꭙ мσνιє ˼</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            min-width: 1024px;
-            transition: all 0.3s ease;
-        }
-
-        body.mobile-mode {
-            min-width: 360px;
-        }
-
-        header {
-            background-color: #000000;
-            text-align: center;
-            padding: 1.5rem;
-            border-bottom: 3px solid #00f0ff;
-        }
-
-        header img {
-            max-width: 200px;
-            display: block;
-            margin: 0 auto 15px;
-        }
-
-        header h1 {
-            color: #00f0ff;
-            font-size: 3em;
-            text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
-        }
-
-        nav {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        nav a {
-            color: #00f0ff;
-            font-weight: bold;
-            margin: 0 20px;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-
-        nav a:hover {
-            text-shadow: 0 0 12px #fff;
-        }
-
-        .toggle-mode {
-            text-align: center;
-            margin: 20px;
-        }
-
-        .toggle-mode button {
-            padding: 12px 25px;
-            background-color: #00f0ff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1em;
-            cursor: pointer;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-
-        section {
-            padding: 50px 0;
-        }
-
-        .search-section {
-            text-align: center;
-        }
-
-        .search-section input[type="text"] {
-            padding: 15px;
-            width: 60%;
-            max-width: 600px;
-            background-color: #0d0d0d;
-            color: #fff;
-            border: 2px solid #00f0ff;
-            border-radius: 5px;
-            font-size: 1.2em;
-        }
-
-        .search-section button {
-            padding: 15px 30px;
-            background-color: #00f0ff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .search-section button:hover {
-            background-color: #fff;
-            color: #00f0ff;
-        }
-
-        #movieResult {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        #movieResult img {
-            max-width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
-        }
-
-        #movieResult h2 {
-            color: #00f0ff;
-            font-size: 2em;
-        }
-
-        #movieResult p {
-            color: #ccc;
-            font-size: 1.1em;
-        }
-
-        #movieResult button {
-            margin: 10px;
-            padding: 12px 25px;
-            background-color: #00f0ff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1em;
-            cursor: pointer;
-        }
-
-        #movieResult button:hover {
-            background-color: #fff;
-            color: #00f0ff;
-        }
-
-        #suggestions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .movie-card {
-            background-color: #1a1a1a;
-            border: 1px solid #00f0ff;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
-        }
-
-        .movie-card img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .movie-card h3 {
-            color: #00f0ff;
-            font-size: 1.5em;
-            margin-top: 15px;
-        }
-
-        .movie-card p {
-            font-size: 1em;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .movie-card button {
-            margin: 8px;
-            padding: 12px 20px;
-            background-color: #00f0ff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .movie-card button:hover {
-            background-color: #fff;
-            color: #00f0ff;
-        }
-
-        .color-picker {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .color-picker select {
-            padding: 10px;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            border: 1px solid #00f0ff;
-            border-radius: 5px;
-            font-size: 1.1em;
-        }
-
-        #about-section {
-            text-align: center;
-            padding: 50px 0;
-        }
-
-        #about-section img {
-            max-width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
-            margin-bottom: 25px;
-        }
-
-        #about-section button {
-            margin: 15px;
-            padding: 15px 30px;
-            background-color: #00f0ff;
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1em;
-            cursor: pointer;
-        }
-
-        #about-section button:hover {
-            background-color: #fff;
-            color: #00f0ff;
-        }
-
-        footer {
-            background-color: #000000;
-            text-align: center;
-            color: #cccccc;
-            padding: 30px;
-            border-top: 3px solid #00f0ff;
-            font-size: 1.1em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie OpenApp</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #111;
+      color: #e50914;
+      font-size: 18px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .menu {
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .menu-panel {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .menu-panel button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: none;
+      border: none;
+      color: #fff;
+      text-align: left;
+      cursor: pointer;
+    }
+    .menu-panel button:hover {
+      background: #e50914;
+    }
+    .search-bar {
+      padding: 10px;
+      text-align: center;
+      background: #111;
+    }
+    .search-bar input {
+      width: 80%;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      background: #111;
+      color: #e50914;
+      margin: 0;
+    }
+    .movies-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+    .movie-card {
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+      transition: transform 0.2s;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+    .movie-poster {
+      width: 100%;
+      display: block;
+    }
+    .movie-info {
+      padding: 8px;
+    }
+    .movie-info h3 {
+      margin: 0;
+      font-size: 14px;
+      color: #e50914;
+    }
+    .movie-info p {
+      font-size: 12px;
+      margin: 4px 0;
+      color: #ccc;
+    }
+    .download-btn {
+      display: block;
+      text-align: center;
+      background: #e50914;
+      color: #fff;
+      padding: 6px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-top: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      color: #aaa;
+    }
+    footer a {
+      color: #e50914;
+      text-decoration: none;
+    }
+    /* Spectrum neon theme */
+    .spectrum {
+      background-color: #000;
+      color: #0ff;
+    }
+    .spectrum .movie-card {
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    }
+    .spectrum .movie-info h3 {
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff;
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <div>˹ ᴍɪss ᴘʀᴏᴠɪᴅᴇʀ ˼</div>
+    <div class="menu">☰</div>
+    <div class="menu-panel" id="menuPanel">
+      <button onclick="toggleTheme('light')">ᴡʜɪᴛᴇ ⚪</button>
+      <button onclick="toggleTheme('dark')">ʙʟᴀᴄᴋ 🖤</button>
+      <button onclick="toggleTheme('spectrum')">ʙʟᴜᴇ 🔹</button>
+    </div>
+  </header>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search movies..." onkeypress="if(event.key==='Enter'){searchMovies()}">
+  </div>
 
-<header>
-    <a href="#"><img src="YOUR_LOGO_LINK_HERE" alt=""/></a>
-    <h1>˹ ɴσʙιтα ꭙ мσνιє ˼</h1>
-    <nav>
-        <a href="#home">ʜᴏᴍᴇ</a>
-        <a href="#search-section">ᴍᴏᴠɪᴇ</a>
-        <a href="#about-section">ᴀʙᴏᴜᴛ</a>
-    </nav>
-</header>
+  <h3 class="section-title">✦ sᴇᴀʀᴄʜ ʀᴇsᴜʟᴛ's sʜᴏᴡɪɴɢ ʜᴇʀᴇ ✦</h3>
+  <div id="searchResults" class="movies-container"></div>
 
-<div class="toggle-mode">
-    <button id="modeToggleBtn">ᴛᴜʀɴ ᴍᴏʙɪʟᴇ 📳 ᴍᴏᴅᴇ</button>
-</div>
+  <h3 class="section-title">◈ ᴛʀᴀɴᴅɪɴɢ ᴍᴏᴠɪᴇs ɪɴ ʜɪɴᴅɪ ◈</h3>
+  <div id="hindiMovies" class="movies-container"></div>
 
-<div class="container" id="home">
+  <h3 class="section-title">◈ ᴛʀᴀɴᴅɪɴɢ ᴍᴏᴠɪᴇs ɪɴ ʙᴇɴɢᴀʟɪ ◈</h3>
+  <div id="bengaliMovies" class="movies-container"></div>
 
-    <section id="search-section">
-        <input type="text" id="movieInput" placeholder="ᴇɴᴛᴇʀ ᴍᴏᴠɪᴇ 🍿 ᴛɪᴛʟᴇ ᴇɢ. PUSHPA 2 THE RULE .."/>
-        <button id="searchBtn">🕵️</button>
-        <div id="movieResult"></div>
-    </section>
+  <h3 class="section-title">✦ ᴘᴏᴘᴜʟᴀʀ ɪɴ ᴛʜᴇ ᴡᴏʀʟᴅ 🗺</h3>
+  <div id="movieList" class="movies-container"></div>
 
-    <section id="suggestion-section">
-        <h2>ᴀᴘᴘ sᴜɢɢᴇsᴛɪᴏɴ</h2>
-        <div id="suggestions"></div>
-    </section>
+  <footer>
+    ➻ ɴᴏʙɪᴛᴀ ᴠᴇʀsɪᴏɴ ʙᴜɪʟᴛ 1.0 ʙʏ <a href="https://t.me/NobitaBhaskar" target="_blank">˹ 𝚴 𝐎 𝐁 𝚰 𝐓 𝚲 ˼</a>
+  </footer>
 
-    <section id="about-section">
-        <img src="https://via.placeholder.com/300x300?text=About+Image" alt="About Image"/>
-        <div>
-            <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">ʙᴏᴛ 🤖</button>
-            <button onclick="window.open('https://t.me/NobitaBhaskar', '_blank')">ᴅᴇᴠᴇʟᴏᴘᴇʀ 👨🏻‍💻</button>
-        </div>
-    </section>
+  <script>
+    const apiKey = "282fec93f7dac5a152e0b321327b46c4";
+    const baseUrl = "https://api.themoviedb.org/3";
 
-    <section class="color-picker">
-        <label for="themeColor">sᴇʟᴇᴄᴛ ᴛʜᴇᴍᴇ ᴄᴏʟᴏᴜʀ 🔫 ➻</label>
-        <select id="themeColor">
-            <option value="#0d0d0d">ᴀᴘᴘ sᴜɢɢᴇsᴛᴇᴅ ✤</option>
-            <option value="#00f0ff">ɴᴇᴏɴ ʙʟᴜᴇ 💙</option>
-            <option value="#ff00ff">ɴᴇᴏɴ ᴍᴀɢᴇɴᴛᴀ 🌸</option>
-            <option value="#00ff00">ɴᴇᴏɴ ɢʀᴇᴇɴ 🍏</option>
-            <option value="#ffff00">ɴᴇᴏɴ ʏᴇʟʟᴏᴡ 💛</option>
-        </select>
-    </section>
-</div>
-
-<footer>
-      ᴛ‌‌‌ʜ‌‌‌ɪ‌‌‌s‌‌‌ ᴡ‌‌‌ᴇ‌‌‌ʙ‌‌‌s‌‌‌ɪ‌‌‌ᴛ‌‌‌ᴡ‌‌ᴇ ᴅ‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌ᴅ‌‌‌‌‌‌‌ɴ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌ ᴇ‌‌‌‌‌‌‌x‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌s‌‌‌‌‌‌‌ ᴏ‌‌‌‌‌‌‌ɴ‌‌‌‌‌‌‌ ᴀ‌‌‌‌‌‌‌ɴ‌‌‌‌‌‌‌ʏ‌‌‌‌‌‌‌ s‌‌‌‌‌‌‌ᴇ‌‌‌‌‌‌‌ʀ‌‌‌‌‌‌‌ᴠ‌‌‌‌‌‌‌ᴇ‌‌‌‌‌‌‌ʀ‌‌‌‌‌‌‌ &‌‌‌‌‌‌‌ ᴘ‌‌‌‌‌‌‌ʟ‌‌‌‌‌‌‌ᴀ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌ғ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ʀ‌‌‌‌‌‌‌ᴍ‌‌‌‌‌‌‌ ᴛ‌‌‌‌‌‌‌ʜ‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌s‌‌‌‌‌‌‌ ᴡ‌‌‌‌‌‌‌ᴇ‌‌‌‌‌‌‌ʙ‌‌‌‌‌‌‌s‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌ᴇ‌‌‌‌‌‌‌ ғ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ʀ‌‌‌‌‌‌‌  ˹ ɴ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ʙ‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌ᴀ‌‌‌‌‌‌‌ ꭙ ᴍ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ᴠ‌‌‌‌‌‌‌ɪ‌‌‌‌‌‌‌ᴇ‌‌‌‌‌‌‌ ˼ ʙ‌‌‌‌‌‌‌ᴏ‌‌‌‌‌‌‌ᴛ‌‌‌‌‌‌‌'s ᴡᴇʙ sᴇʀᴠɪᴄᴇ .
-</footer>
-
-<script>
-    const IMDB_API_KEY = 'd56c5267';
-    const modeToggleBtn = document.getElementById('modeToggleBtn');
-
-    modeToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('mobile-mode');
-        modeToggleBtn.textContent = document.body.classList.contains('mobile-mode')
-            ? 'Turn Into Desktop Mode'
-            : 'Turn Into Mobile Mode';
+    // Menu toggle
+    document.querySelector(".menu").addEventListener("click", () => {
+      const panel = document.getElementById("menuPanel");
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
     });
 
-    document.getElementById('themeColor').addEventListener('change', function () {
-        document.body.style.backgroundColor = this.value;
+    window.addEventListener("click", (e) => {
+      if (!e.target.closest(".menu") && !e.target.closest("#menuPanel")) {
+        document.getElementById("menuPanel").style.display = "none";
+      }
     });
 
-    document.getElementById('searchBtn').addEventListener('click', function () {
-        const title = document.getElementById('movieInput').value;
-        if (!title) return alert('Please enter a movie title.');
-
-        fetch(`https://www.omdbapi.com/?apikey=${IMDB_API_KEY}&t=${encodeURIComponent(title)}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.Response === "True") {
-                    const imdbLink = `https://www.imdb.com/title/${data.imdbID}/`;
-                    document.getElementById('movieResult').innerHTML = `
-                        <img src="${data.Poster}" alt="${data.Title}"/>
-                        <h2>${data.Title}</h2>
-                        <p>${data.Plot}</p>
-                        <button onclick="window.open('${imdbLink}', '_blank')">ᴡᴀᴛᴄʜ ᴏɴ ʏᴏᴜᴛᴜʙᴇ ▶️</button>
-                        <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">ᴡᴀᴛᴄʜ ᴏɴ ᴛᴇʟᴇɢʀᴀᴍ ✅</button>
-                    `;
-                } else {
-                    alert('Movie not found.');
-                }
-            });
-    });
-
-    function loadSuggestions() {
-        const suggestionContainer = document.getElementById('suggestions');
-        suggestionContainer.innerHTML = '';
-
-        const movies = [
-            "Inception", "The Dark Knight", "Interstellar", "The Matrix",
-            "Parasite", "Joker", "Gladiator", "Whiplash",
-            "Avengers: Endgame", "Pulp Fiction"
-        ];
-
-        const shuffled = movies.sort(() => 0.5 - Math.random()).slice(0, 6);
-
-        shuffled.forEach(title => {
-            fetch(`https://www.omdbapi.com/?apikey=${IMDB_API_KEY}&t=${encodeURIComponent(title)}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.Response === "True") {
-                        const imdbLink = `https://www.imdb.com/title/${data.imdbID}/`;
-                        suggestionContainer.innerHTML += `
-                            <div class="movie-card">
-                                <img src="${data.Poster}" alt="${data.Title}"/>
-                                <h3>${data.Title}</h3>
-                                <p>${data.Plot}</p>
-                                <button onclick="window.open('${imdbLink}', '_blank')">Watch on IMDb</button>
-                                <button onclick="window.open('https://t.me/Nobita_X_Movie_Bot', '_blank')">Watch on Telegram</button>
-                            </div>
-                        `;
-                    }
-                });
-        });
+    function toggleTheme(mode) {
+      document.body.classList.remove("spectrum");
+      if (mode === "light") {
+        document.body.style.background = "#fff";
+        document.body.style.color = "#000";
+      } else if (mode === "dark") {
+        document.body.style.background = "#000";
+        document.body.style.color = "#fff";
+      } else if (mode === "spectrum") {
+        document.body.classList.add("spectrum");
+      }
     }
 
-    window.addEventListener('load', loadSuggestions);
-</script>
+    async function fetchMovies(endpoint, containerId) {
+      const res = await fetch(endpoint);
+      const data = await res.json();
+      displayMovies(data.results, document.getElementById(containerId));
+    }
+
+    async function fetchAll() {
+      await fetchMovies(`${baseUrl}/movie/popular?api_key=${apiKey}&language=en-US&page=1`, "movieList");
+      await fetchMovies(`${baseUrl}/discover/movie?api_key=${apiKey}&with_original_language=hi&sort_by=popularity.desc`, "hindiMovies");
+      await fetchMovies(`${baseUrl}/discover/movie?api_key=${apiKey}&with_original_language=bn&sort_by=popularity.desc`, "bengaliMovies");
+    }
+
+    async function searchMovies() {
+      const query = document.getElementById("searchInput").value;
+      if (!query) return;
+      const res = await fetch(`${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      const container = document.getElementById("searchResults");
+      container.innerHTML = "";
+      if (data.results.length > 0) {
+        displayMovies(data.results, container);
+      } else {
+        container.innerHTML = `<p>No results found for "${query}"</p>`;
+      }
+    }
+
+    function displayMovies(movies, container) {
+      movies.forEach(movie => {
+        const poster = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "";
+        const year = movie.release_date ? movie.release_date.split("-")[0] : "N/A";
+        const titleSlug = movie.title.replace(/\\s+/g, "-");
+        const card = document.createElement("div");
+        card.className = "movie-card";
+        card.innerHTML = `
+          <img class="movie-poster" src="${poster}" alt="${movie.title}">
+          <div class="movie-info">
+            <h3>${movie.title}</h3>
+            <p>${year}</p>
+            <a class="download-btn" href="https://t.me/MissProviderBot?start=getfile-${titleSlug}" target="_blank">📥 ᴅᴏᴡɴʟᴏᴀᴅ 📥</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    fetchAll();
+  </script>
+</body>
+</html>

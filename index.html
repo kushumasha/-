@@ -2,247 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie OpenApp</title>
+  <title>Movie Bot OpenApp</title>
   <style>
     body {
-      margin: 0;
+      margin:0;
       font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
+      background:#000;
+      color:#fff;
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background-color: #111;
-      color: #e50914;
-      font-size: 18px;
-      font-weight: bold;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 15px;
+      background:#111;
     }
-    .menu {
-      cursor: pointer;
-      font-size: 20px;
+    header h1 { font-size:20px; color:#e50914; }
+    #menuBtn {
+      font-size:18px;
+      cursor:pointer;
+      background:none;
+      border:none;
+      color:#fff;
     }
-    .menu-panel {
-      display: none;
-      position: absolute;
-      top: 50px;
-      right: 10px;
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 6px;
-      overflow: hidden;
+    #menu {
+      display:none;
+      position:absolute;
+      right:10px;
+      top:50px;
+      background:#111;
+      border:1px solid #333;
+      border-radius:6px;
+      padding:10px;
+      z-index:100;
     }
-    .menu-panel button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background: none;
-      border: none;
-      color: #fff;
-      text-align: left;
-      cursor: pointer;
+    #menu button {
+      display:block;
+      width:100%;
+      margin:5px 0;
+      background:#222;
+      color:#fff;
+      border:none;
+      padding:8px;
+      border-radius:4px;
+      cursor:pointer;
     }
-    .menu-panel button:hover {
-      background: #e50914;
+    #searchBar {
+      width:100%;
+      padding:10px;
+      font-size:16px;
+      border:none;
+      outline:none;
     }
-    .search-bar {
-      padding: 10px;
-      text-align: center;
-      background: #111;
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      padding:10px;
     }
-    .search-bar input {
-      width: 80%;
-      padding: 8px;
-      border: none;
-      border-radius: 4px;
+    .card {
+      background:#111;
+      border-radius:8px;
+      overflow:hidden;
+      transition:transform 0.2s;
     }
-    .section-title {
-      font-size: 16px;
-      font-weight: bold;
-      padding: 10px;
-      background: #111;
-      color: #e50914;
-      margin: 0;
-    }
-    .movies-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 10px;
-    }
-    .movie-card {
-      background: #111;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
-      transition: transform 0.2s;
-    }
-    .movie-card:hover {
-      transform: scale(1.05);
-    }
-    .movie-poster {
-      width: 100%;
-      display: block;
-    }
-    .movie-info {
-      padding: 8px;
-    }
-    .movie-info h3 {
-      margin: 0;
-      font-size: 14px;
-      color: #e50914;
-    }
-    .movie-info p {
-      font-size: 12px;
-      margin: 4px 0;
-      color: #ccc;
-    }
+    .card:hover { transform:scale(1.03); }
+    .card img { width:100%; display:block; }
+    .card .info { padding:10px; }
+    .card .info h3 { margin:0; font-size:16px; }
     .download-btn {
-      display: block;
-      text-align: center;
-      background: #e50914;
-      color: #fff;
-      padding: 6px;
-      border-radius: 4px;
-      text-decoration: none;
-      margin-top: 6px;
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 12px;
+      background:#e50914;
+      color:#fff;
+      border-radius:4px;
+      text-decoration:none;
+      font-size:14px;
     }
     footer {
-      text-align: center;
-      padding: 10px;
-      font-size: 12px;
-      color: #aaa;
+      text-align:center;
+      padding:10px;
+      font-size:14px;
+      background:#111;
+      margin-top:20px;
     }
-    footer a {
-      color: #e50914;
-      text-decoration: none;
-    }
-    /* Spectrum neon theme */
-    .spectrum {
-      background-color: #000;
-      color: #0ff;
-    }
-    .spectrum .movie-card {
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
-    }
-    .spectrum .movie-info h3 {
-      color: #0ff;
-      text-shadow: 0 0 8px #0ff;
-    }
+    footer a { color:#1e90ff; text-decoration:none; }
   </style>
 </head>
 <body>
   <header>
-    <div>˹ ᴍɪss ᴘʀᴏᴠɪᴅᴇʀ ˼</div>
-    <div class="menu">☰</div>
-    <div class="menu-panel" id="menuPanel">
-      <button onclick="toggleTheme('light')">ᴡʜɪᴛᴇ ⚪</button>
-      <button onclick="toggleTheme('dark')">ʙʟᴀᴄᴋ 🖤</button>
-      <button onclick="toggleTheme('spectrum')">ʙʟᴜᴇ 🔹</button>
+    <h1>Movie Bot</h1>
+    <button id="menuBtn">☰</button>
+    <div id="menu">
+      <button id="darkToggle">Dark/Light</button>
+      <button id="spectrumToggle">Spectrum Neon</button>
+      <button id="langToggle">Change Language</button>
     </div>
   </header>
-  
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search movies..." onkeypress="if(event.key==='Enter'){searchMovies()}">
-  </div>
 
-  <h3 class="section-title">✦ sᴇᴀʀᴄʜ ʀᴇsᴜʟᴛ's sʜᴏᴡɪɴɢ ʜᴇʀᴇ ✦</h3>
-  <div id="searchResults" class="movies-container"></div>
-
-  <h3 class="section-title">◈ ᴛʀᴀɴᴅɪɴɢ ᴍᴏᴠɪᴇs ɪɴ ʜɪɴᴅɪ ◈</h3>
-  <div id="hindiMovies" class="movies-container"></div>
-
-  <h3 class="section-title">◈ ᴛʀᴀɴᴅɪɴɢ ᴍᴏᴠɪᴇs ɪɴ ʙᴇɴɢᴀʟɪ ◈</h3>
-  <div id="bengaliMovies" class="movies-container"></div>
-
-  <h3 class="section-title">✦ ᴘᴏᴘᴜʟᴀʀ ɪɴ ᴛʜᴇ ᴡᴏʀʟᴅ 🗺</h3>
-  <div id="movieList" class="movies-container"></div>
+  <input type="text" id="searchBar" placeholder="Search movies...">
+  <div id="results" class="grid"></div>
+  <div id="suggestions" class="grid"></div>
 
   <footer>
-    ➻ ɴᴏʙɪᴛᴀ ᴠᴇʀsɪᴏɴ ʙᴜɪʟᴛ 1.0 ʙʏ <a href="https://t.me/NobitaBhaskar" target="_blank">˹ 𝚴 𝐎 𝐁 𝚰 𝐓 𝚲 ˼</a>
+    Built 1.0 By <a href="https://t.me/NobitaBhaskar" target="_blank">˹ 𝚴 𝐎 𝐁 𝚰 𝐓 𝚲 ˼</a>
   </footer>
 
-  <script>
-    const apiKey = "282fec93f7dac5a152e0b321327b46c4";
-    const baseUrl = "https://api.themoviedb.org/3";
+<script>
+const API_KEY = "282fec93f7dac5a152e0b321327b46c4";
+const IMG_PATH = "https://image.tmdb.org/t/p/w500";
+const resultsEl = document.getElementById("results");
+const suggestionsEl = document.getElementById("suggestions");
+const searchBar = document.getElementById("searchBar");
 
-    // Menu toggle
-    document.querySelector(".menu").addEventListener("click", () => {
-      const panel = document.getElementById("menuPanel");
-      panel.style.display = panel.style.display === "block" ? "none" : "block";
+// menu toggle
+document.getElementById("menuBtn").onclick = () => {
+  const m = document.getElementById("menu");
+  m.style.display = m.style.display === "block" ? "none":"block";
+};
+
+// dark/light toggle
+document.getElementById("darkToggle").onclick = () => {
+  document.body.style.background =
+    document.body.style.background === "white" ? "#000" : "white";
+  document.body.style.color =
+    document.body.style.color === "black" ? "#fff" : "black";
+};
+
+// neon toggle
+document.getElementById("spectrumToggle").onclick = () => {
+  document.querySelectorAll(".card,.info h3,.download-btn").forEach(el=>{
+    el.style.textShadow="0 0 8px #0ff, 0 0 12px #0ff";
+    el.style.color="#0ff";
+  });
+};
+
+// search
+searchBar.addEventListener("keypress", e=>{
+  if(e.key==="Enter"){
+    searchMovie(searchBar.value);
+  }
+});
+
+async function searchMovie(query){
+  resultsEl.innerHTML = "<p>Loading...</p>";
+  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+  const data = await res.json();
+  if(data.results.length===0){
+    resultsEl.innerHTML = `<p>No results found for "${query}"</p>`;
+  } else {
+    resultsEl.innerHTML = "";
+    data.results.forEach(movie=>{
+      const titleSlug = movie.title.replace(/\s+/g,"-");
+      const card = document.createElement("div");
+      card.className="card";
+      card.innerHTML=`
+        <img src="${IMG_PATH+movie.poster_path}" alt="${movie.title}">
+        <div class="info">
+          <h3>${movie.title} (${(movie.release_date||"").slice(0,4)})</h3>
+          <p>${movie.overview||""}</p>
+          <a class="download-btn" href="https://t.me/MissProviderBot?start=getfile-${titleSlug}" target="_blank">Download</a>
+        </div>`;
+      resultsEl.appendChild(card);
     });
+  }
+}
 
-    window.addEventListener("click", (e) => {
-      if (!e.target.closest(".menu") && !e.target.closest("#menuPanel")) {
-        document.getElementById("menuPanel").style.display = "none";
-      }
-    });
-
-    function toggleTheme(mode) {
-      document.body.classList.remove("spectrum");
-      if (mode === "light") {
-        document.body.style.background = "#fff";
-        document.body.style.color = "#000";
-      } else if (mode === "dark") {
-        document.body.style.background = "#000";
-        document.body.style.color = "#fff";
-      } else if (mode === "spectrum") {
-        document.body.classList.add("spectrum");
-      }
-    }
-
-    async function fetchMovies(endpoint, containerId) {
-      const res = await fetch(endpoint);
-      const data = await res.json();
-      displayMovies(data.results, document.getElementById(containerId));
-    }
-
-    async function fetchAll() {
-      await fetchMovies(`${baseUrl}/movie/popular?api_key=${apiKey}&language=en-US&page=1`, "movieList");
-      await fetchMovies(`${baseUrl}/discover/movie?api_key=${apiKey}&with_original_language=hi&sort_by=popularity.desc`, "hindiMovies");
-      await fetchMovies(`${baseUrl}/discover/movie?api_key=${apiKey}&with_original_language=bn&sort_by=popularity.desc`, "bengaliMovies");
-    }
-
-    async function searchMovies() {
-      const query = document.getElementById("searchInput").value;
-      if (!query) return;
-      const res = await fetch(`${baseUrl}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`);
-      const data = await res.json();
-      const container = document.getElementById("searchResults");
-      container.innerHTML = "";
-      if (data.results.length > 0) {
-        displayMovies(data.results, container);
-      } else {
-        container.innerHTML = `<p>No results found for "${query}"</p>`;
-      }
-    }
-
-    function displayMovies(movies, container) {
-      movies.forEach(movie => {
-        const poster = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "";
-        const year = movie.release_date ? movie.release_date.split("-")[0] : "N/A";
-        const titleSlug = movie.title.replace(/\\s+/g, "-");
-        const card = document.createElement("div");
-        card.className = "movie-card";
-        card.innerHTML = `
-          <img class="movie-poster" src="${poster}" alt="${movie.title}">
-          <div class="movie-info">
-            <h3>${movie.title}</h3>
-            <p>${year}</p>
-            <a class="download-btn" href="https://t.me/MissProviderBot?start=getfile-${titleSlug}" target="_blank">📥 ᴅᴏᴡɴʟᴏᴀᴅ 📥</a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    fetchAll();
-  </script>
+// load popular movies
+async function loadPopular(){
+  const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+  const data = await res.json();
+  suggestionsEl.innerHTML="";
+  data.results.forEach(movie=>{
+    const titleSlug = movie.title.replace(/\s+/g,"-");
+    const card = document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <img src="${IMG_PATH+movie.poster_path}" alt="${movie.title}">
+      <div class="info">
+        <h3>${movie.title} (${(movie.release_date||"").slice(0,4)})</h3>
+        <a class="download-btn" href="https://t.me/MissProviderBot?start=getfile-${titleSlug}" target="_blank">Download</a>
+      </div>`;
+    suggestionsEl.appendChild(card);
+  });
+}
+loadPopular();
+</script>
 </body>
 </html>
